@@ -11,10 +11,12 @@ pstack is poteto's answer to AI slop code. It turns an agent into an engineering
 - **Memory.** `t3_thread_read` and `t3_thread_search` replace mining Cursor transcript files.
 - **Proof.** `preview_*` browser tools and `device_*` simulators replace external control skills. Screenshots and recordings land in the thread.
 
+This is Daniel's fork of [uzairansaruzi/p3-stack](https://github.com/uzairansaruzi/p3-stack).
+
 ## Install
 
 ```bash
-git clone https://github.com/uzairansaruzi/p3-stack.git
+git clone https://github.com/DanielMajoinen/p3-stack.git
 cd p3-stack
 ./install.sh
 ```
