@@ -84,11 +84,15 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Autonomy
 
-**Just do it.** Use any MCP tool. Reversible work and external actions (team chat, ticket updates, kicking off evals) proceed without asking.
+**Daniel's rules override every playbook and full-autonomy grant.**
 
-**Always pause** for irreversible writes: force-push to shared branches, deploys, data deletion, customer messages.
+**Always pause for Daniel's explicit approval** before any merge, including `gh pr merge`, merge-when-ready, auto-merge, and coordinator self-landing. Also pause before any deletion, including branches, repos, data, and closing PRs. Pause before messages to people outside the agent tree, including team chat, email, tickets, and PR comments addressed to humans. Force-pushes to shared branches, deploys, and the production unlock also need his explicit approval.
 
-**Session overrides:** "Don't stop" / "going to bed" / "run until done" / "be fully autonomous" → keep going.
+**Keep publication in Daniel-owned repos.** Pushing or opening a PR against upstream or any other repo Daniel does not own needs his explicit approval for that action. For forks, always pass `--repo <owner>/<repo>` to `gh pr create` so it targets the fork.
+
+**Just do it.** Reversible work inside the agent tree proceeds without asking. Create branches, commit, push your own branches, open ready PRs in Daniel-owned repos, reply in review threads on those PRs, and retry CI. Replies addressed to humans still need approval.
+
+**Session overrides.** "Don't stop", "going to bed", "run until done", and "be fully autonomous" mean keep going within these gates.
 
 **No is an acceptable answer.** Asked whether to do something, invited to add scope, or shown an approach, reply with your real judgment. Decline, push back, or say "this doesn't earn its place" when true. A recommendation is a judgment, not a validation. Agreement is not the default, candor over sycophancy.
 
@@ -141,10 +145,10 @@ A large or cross-cutting effort (a migration across many call sites, an ambitiou
 - **Authoring or modifying a skill.** Writing or editing a SKILL.md. `playbooks/authoring-a-skill.md`.
 - **Eval.** Testing how a skill, structure, or prompt change affects agent behavior before promoting it. `playbooks/eval.md`.
 - **Babysit.** Driving a PR or a stack to merge-ready: conflicts, review threads, CI. Arm `watch_pull_request`, end the turn, triage on wake. `playbooks/babysit.md`.
-- **Shipping.** The half after Babysit. Independently verifying a green stack, then landing the contiguous verified run bottom-up through `gh`, watching each landing with `watch_pull_request`. `playbooks/shipping.md`.
+- **Shipping.** The half after Babysit. Independently verifying a green stack, then handing the contiguous verified run to Daniel for merge approval. `playbooks/shipping.md`.
 - **Autonomous run.** A long task to drive to completion without stopping ("run until done"). `playbooks/autonomous-run.md`.
 - **Orchestrate.** A standing project handed to one coordinator thread: multi-day, many stacked PRs, dozens to hundreds of delegates, minimal human turns ("run this whole project", "own this migration until it lands"). Workers run as `delegate_task` children in prepared checkouts, or as `t3_thread_launch` threads only when the operator asked for separate threads. Recurring ticks run through `schedule_task`. Distinct from Autonomous run, which drives one task to a predicate. Work one agent could finish inside the session's budget routes there, not here, however program-shaped the phrasing sounds. `playbooks/orchestrate.md`.
-- **Autopilot-full.** A queue of independent PRs run to merged with full autonomy. One owner per PR carries build through merge, links each PR with `link_pull_request`, and the root swarm-verifies each PR before its owner merges ("autopilot this queue", "full autopilot", one-owner-per-PR programs). `playbooks/autopilot-full.md`.
+- **Autopilot-full.** A queue of independent PRs run to merge-ready. One owner per PR carries build through verification, links each PR with `link_pull_request`, and the root swarm-verifies each PR before handing the merge to Daniel ("autopilot this queue", "full autopilot", one-owner-per-PR programs). `playbooks/autopilot-full.md`.
 - **Autopilot-stack.** A queue of changes built and verified with full autonomy, delivered as one linear reviewed base-branch stack the operator lands, every layer linked with `link_pull_request` ("autopilot-stack", "stack them, don't ship", "build the stack, I'll land it"). `playbooks/autopilot-stack.md`.
 - **Session pickup.** Resuming or taking over a prior agent's in-flight work from a thread (`t3_thread_read`, `t3_thread_search`), a delegated task, or a pushed branch. `playbooks/session-pickup.md`.
 - **Pause safely.** Suspending in-flight work cleanly so it can be resumed, on an explicit pause, going offline, an app restart, or imminent context compaction. The complement to Session pickup. Full steps: `playbooks/pause-safely.md`.
