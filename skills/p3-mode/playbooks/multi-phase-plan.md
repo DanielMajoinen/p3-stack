@@ -41,7 +41,7 @@ The program runs `skills/p3-mode/playbooks/<execution playbook>.md`. <Who merges
 
 ### PR mechanics, for every PR
 - [ ] GitHub CLI (`gh`) is the forge. Never require Graphite (`gt`). Call `link_pull_request` for every PR the moment it opens.
-- [ ] Open the PR ready, never draft, per **Opening a PR**. Use `gh pr create --base <base-branch>`. A stack child targets its parent branch.
+- [ ] Open the PR ready, never draft, per **Opening a PR**. Use `gh pr create --repo <owner>/<repo> --base <base-branch>`. A stack child targets its parent branch.
 - [ ] Run the repo's lint and typecheck once before the PR-facing push. Push with hooks on.
 - [ ] Run the **unslop** skill before each commit and the **no-comments** skill before review.
 - [ ] Triage every Bugbot and security-reviewer comment per `../references/bugbot-triage.md`.
@@ -53,7 +53,7 @@ The program runs `skills/p3-mode/playbooks/<execution playbook>.md`. <Who merges
 - [ ] <The merge or append rule from the execution playbook, with the patch-id rule from `playbooks/shipping.md`.>
 
 ### Boot recipe, for every live lane
-Each live lane is a delegated worker at the PR head. Use `t3_thread_launch` with a `workspaceStrategy` for a lane that needs its own worktree. Drive the surface through `preview_*` for browser UIs and `device_*` for simulators.
+Each live lane is a delegated worker at the PR head. Prepare each lane's isolated worktree before delegation and supply its absolute path in the `delegate_task` brief. Drive the surface through `preview_*` for browser UIs and `device_*` for simulators.
 
 - [ ] `git fetch origin <head-branch> && git checkout <head SHA>`.
 - [ ] <Start the backend and the surface. Wait for ready.>
@@ -96,7 +96,7 @@ Each live lane is a delegated worker at the PR head. Use `t3_thread_launch` with
 - [ ] Root's clean verdict at the exact head SHA.
 - [ ] Bugbot triage done.
 - [ ] Rebased onto current trunk after the verdict, patch-id unchanged.
-- [ ] <The owner squash-merges its own PR, or the root appends it to the base-branch stack and the operator lands it bottom-up.>
+- [ ] Hand the merge-ready PR or verified stack to Daniel per [Autonomy](../SKILL.md#autonomy).
 
 ## Close the program
 - [ ] Every box above is checked with its evidence.
